@@ -13,14 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categorys', function (Blueprint $table) {
+        Schema::create('slides', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image');
+            $table->string('slug');
             $table->integer('status')->default(0);
-            $table->string('slug')->nullable();
+            $table->string('link')->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categorys')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->nestedSet();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,9 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('categorys', function (Blueprint $table) {
-            $table->dropIfExists('categorys');
-        });
-
+        Schema::dropIfExists('slides');
     }
 };

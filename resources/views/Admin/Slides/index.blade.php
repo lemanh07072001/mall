@@ -10,7 +10,7 @@
 @section('title','Quản lý danh mục')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('category') }}
+    {{ Breadcrumbs::render('slide') }}
 @endsection
 
 @section('content')
@@ -21,12 +21,23 @@
                     <form>
                         <div class="row">
                             <div class="col-1 ">
-                                <a href="{{route('category.create')}}" class="btn btn-primary btn-sm btn-block">
+                                <a href="{{route('slide.create')}}" class="btn btn-primary btn-sm btn-block">
                                     <i class="fas fa-plus"></i>
                                 </a>
                             </div>
-                            <div class="col-2 "> </div>
-                            <div class="col-2 "> </div>
+                            <div class="col-1 ">
+                                <button class="btn btn-danger btn-sm btn-block deleteAll">
+                                    Xóa (<span id="countCheckBox">0</span>)
+                                </button>
+                            </div>
+                            <div class="col-1 "> </div>
+                            <div class="col-2 ">
+                                <select class="form-control form-control-sm" name="arrange">
+                                    <option value="">Xắp xếp</option>
+                                    <option value="ASC" {{request()->status == 'ASC'?'selected':''}}>Xắp xếp: Thấp->Cao</option>
+                                    <option value="DESC" {{request()->status == 'DESC'?'selected':''}}>Xắp xếp: Cao->Thấp<i class="fas fa-sort-alpha-down-alt"></i></option>
+                                </select>
+                            </div>
                             <div class="col-2 ">
                                 <select class="form-control form-control-sm" name="user_id">
                                     <option value="">Người tạo</option>
@@ -48,7 +59,7 @@
                             <div class="col-2 ">
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 100%;">
-                                        <input type="text" value="{{request()->table_search}}" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <input type="search" value="{{request()->table_search}}" name="table_search" class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
 
@@ -67,12 +78,14 @@
 
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0" style="max-height: 430px;">
-                    @include('Admin.Categorys.table',['getAll' => $getAll])
+                <div class="card-body table-responsive p-0" >
+                    @include('Admin.Slides.table',['getAll' => $getAll])
                 </div>
                 <!-- /.card-body -->
             </div>
-
+            <div class="d-flex justify-content-end">
+                {{$getAll->links()}}
+            </div>
         </div>
     </div>
 @endsection

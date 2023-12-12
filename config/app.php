@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         Barryvdh\Debugbar\ServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -212,4 +213,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
     'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+    'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 ];

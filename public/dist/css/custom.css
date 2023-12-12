@@ -1,3 +1,16 @@
-.btnCustom {
-    border-radius: 10px;
+.tab.check {
+    display: block !important;
+}
+
+.pane.check{
+    display: block !important;
+}
+
+.textx {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    width: 400px;
 }
